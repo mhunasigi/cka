@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  WEBSERVER: nginx
+kind: ConfigMap
+metadata:
+  name: cm01
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-env-from-configmap
+  labels:
+    app: pod-env-from-configmap
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    envFrom:
+    - configMapRef:
+        name: cm01
