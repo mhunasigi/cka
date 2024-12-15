@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-example01
+spec:
+  jobTemplate:
+    metadata:
+      name: cronjob-example01
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - command:
+            - date
+            image: busybox
+            name: cronjob-example01
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: '*/2 * * * *'
