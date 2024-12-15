@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  index.html: |
+    Hello World, this page is served using a configmap
+kind: ConfigMap
+metadata:
+  name: cm01
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webserver-using-configmap
+  labels:
+    app: webserver-using-configmap
+spec:
+  volumes:
+  - name: vol01
+    configMap:
+      name: cm01
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: vol01
+      mountPath: /usr/share/nginx/html
