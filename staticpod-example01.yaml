@@ -1,0 +1,13 @@
+# Copy the yaml file to the manifest location (default : /etc/kubernetes/manifests) identified by 
+# staticPodPath entry in kubelet config file /var/lib/kubelet/config.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: staticpod-example01
+  labels:
+    app: staticpod
+spec:
+  containers:
+  - name: staticpod
+    image: nginx
