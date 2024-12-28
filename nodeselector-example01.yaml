@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web02
+  name: web02
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web02
+  template:
+    metadata:
+      labels:
+        app: web02
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      nodeSelector:
+        disktype: ssd
