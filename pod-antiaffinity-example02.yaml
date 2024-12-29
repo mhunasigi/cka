@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pod-affinity-example01
+  name: pod-affinity-example01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-affinity-example01
+  template:
+    metadata:
+      labels:
+        app: pod-affinity-example01
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - pod-affinity-example01
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - image: nginx
+        name: nginx
