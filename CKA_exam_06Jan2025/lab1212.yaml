@@ -1,0 +1,107 @@
+# kubectl taint node node2 type=db:NoSchedule -o yaml --dry-run=client > lab1212.yaml
+
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    kubeadm.alpha.kubernetes.io/cri-socket: /run/docker/containerd/containerd.sock
+    node.alpha.kubernetes.io/ttl: "0"
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  creationTimestamp: "2025-01-06T04:36:18Z"
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node2
+    kubernetes.io/os: linux
+  name: node2
+  resourceVersion: "12759"
+  uid: f8740479-f40c-410c-b600-ba5ee28d5ebc
+spec:
+  podCIDR: 10.5.1.0/24
+  podCIDRs:
+  - 10.5.1.0/24
+  taints:
+  - effect: NoSchedule
+    key: type
+    value: db
+status:
+  addresses:
+  - address: 192.168.0.22
+    type: InternalIP
+  - address: node2
+    type: Hostname
+  allocatable:
+    cpu: "8"
+    ephemeral-storage: 65504Mi
+    hugepages-1Gi: "0"
+    hugepages-2Mi: 422Mi
+    memory: 32514844Ki
+    pods: "110"
+  capacity:
+    cpu: "8"
+    ephemeral-storage: 65504Mi
+    hugepages-1Gi: "0"
+    hugepages-2Mi: 422Mi
+    memory: 32946972Ki
+    pods: "110"
+  conditions:
+  - lastHeartbeatTime: "2025-01-06T06:44:06Z"
+    lastTransitionTime: "2025-01-06T04:36:18Z"
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
+    status: "False"
+    type: MemoryPressure
+  - lastHeartbeatTime: "2025-01-06T06:44:06Z"
+    lastTransitionTime: "2025-01-06T04:36:18Z"
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
+    status: "False"
+    type: DiskPressure
+  - lastHeartbeatTime: "2025-01-06T06:44:06Z"
+    lastTransitionTime: "2025-01-06T04:36:18Z"
+    message: kubelet has sufficient PID available
+    reason: KubeletHasSufficientPID
+    status: "False"
+    type: PIDPressure
+  - lastHeartbeatTime: "2025-01-06T06:44:06Z"
+    lastTransitionTime: "2025-01-06T04:36:33Z"
+    message: kubelet is posting ready status
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 10250
+  images:
+  - names:
+    - docker.io/cloudnativelabs/kube-router@sha256:c58f85415eb9f2bc08d3ffde41389fb3db7746fe65b6528df04a0b7853b0c384
+    - docker.io/cloudnativelabs/kube-router:latest
+    sizeBytes: 107261300
+  - names:
+    - docker.io/library/nginx@sha256:42e917aaa1b5bb40dd0f6f7f4f857490ac7747d7ef73b391c774a41a8b994f15
+    - docker.io/library/nginx:latest
+    sizeBytes: 72099410
+  - names:
+    - registry.k8s.io/kube-proxy@sha256:f775c9f86ed22956ceae174ee9474aa8044f2a675b72124d566b7d7ac866b249
+    - registry.k8s.io/kube-proxy:v1.27.16
+    sizeBytes: 27680224
+  - names:
+    - docker.io/library/busybox@sha256:2919d0172f7524b2d8df9e50066a682669e6d170ac0f6a49676d54358fe970b5
+    - docker.io/library/busybox:latest
+    sizeBytes: 2167089
+  - names:
+    - registry.k8s.io/pause@sha256:3d380ca8864549e74af4b29c10f9cb0956236dfb01c40ca076fb6c37253234db
+    - registry.k8s.io/pause:3.6
+    sizeBytes: 301773
+  nodeInfo:
+    architecture: amd64
+    bootID: ddf52b2b-0a45-4aa1-a34d-c9f704ef0f0f
+    containerRuntimeVersion: containerd://1.6.21
+    kernelVersion: 4.4.0-210-generic
+    kubeProxyVersion: v1.27.2
+    kubeletVersion: v1.27.2
+    machineID: 3a876ec3007548198848944ad473ba19
+    operatingSystem: linux
+    osImage: CentOS Linux 7 (Core)
+    systemUUID: 6E717E48-761F-6640-AA8F-878704CE72ED

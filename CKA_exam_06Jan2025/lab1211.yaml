@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: access
+spec: {}
+status: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: null
+  name: lab1211
+  namespace: access
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: lab1211-role
+  namespace: access
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - create
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - daemonsets
+  - statefulsets
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: lab1211-rolebinding
+  namespace: access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: lab1211-role
+subjects:
+- kind: ServiceAccount
+  name: lab1211
+  namespace: access

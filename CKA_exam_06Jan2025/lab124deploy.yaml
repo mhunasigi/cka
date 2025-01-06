@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: lab124deploy
+  name: lab124deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab124deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: lab124deploy
+    spec:
+      initContainers:
+      - image: busybox
+        name: busybox
+        command: ["sleep","30"]
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
