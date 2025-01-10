@@ -2,28 +2,43 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: myweb
-  name: myweb
+    app: myweb1
+  name: myweb1
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: myweb
-  strategy:
-    rollingUpdate:
-      maxSurge: 40%
-      maxUnavailable: 60%
+      app: myweb1
   template:
     metadata:
       labels:
-        app: myweb
+        app: myweb1
         type: canary
     spec:
       containers:
       - image: nginx:1.14
         name: nginx
-        resources: {}
-status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myweb2
+  name: myweb2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myweb2
+  template:
+    metadata:
+      labels:
+        app: myweb2
+        type: canary
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
 ---
 apiVersion: v1
 kind: Service
@@ -40,6 +55,3 @@ spec:
   type: NodePort
   selector:
     type: canary
-status:
-  loadBalancer: {}
----
