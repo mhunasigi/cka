@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: allaccess
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: allaccess
+  name: allaccess
+spec:
+  serviceAccountName: allaccess
+  containers:
+  - image: nginx
+    name: allaccess
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

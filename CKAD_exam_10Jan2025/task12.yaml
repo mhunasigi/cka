@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myweb
+  strategy:
+    rollingUpdate:
+      maxSurge: 40%
+      maxUnavailable: 60%
+  template:
+    metadata:
+      labels:
+        app: myweb
+        type: canary
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myweb
+  name: canary
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 32000
+  type: NodePort
+  selector:
+    type: canary
+status:
+  loadBalancer: {}
+---

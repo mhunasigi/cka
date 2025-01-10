@@ -1,0 +1,5 @@
+# Dockerfile
+# FROM alpine
+# CMD ["echo","hello","world"]
+# docker build -t greetworld .
+# docker save -o greetworld.tar greetworld:latest

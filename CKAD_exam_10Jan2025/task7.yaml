@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: task7
+    service: nginx
+  name: task7
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: task7
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 2
+  template:
+    metadata:
+      labels:
+        app: task7
+        type: webshop
+    spec:
+      containers:
+      - image: nginx:1.18
+        name: nginx
