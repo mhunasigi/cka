@@ -48,3 +48,22 @@ spec:
   type: NodePort
 status:
   loadBalancer: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: task8ingress
+  namespace: ckad-ns6
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mynginx.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-deployment
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
